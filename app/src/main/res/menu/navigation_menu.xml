@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<item android:title="Nam Nguyen"
+    android:icon="@drawable/ic_useradd"/>
+    <item
+        android:icon="@drawable/ic_useradd"
+        android:title="Theo doi"
+        android:id="@+id/mnuInfo"/>
+    <item
+        android:icon="@drawable/ic_star"
+        android:title="Trang da luu"
+        />
+    <item
+        android:icon="@drawable/ic_sms"
+        android:title="Binh luan cua toi" />
+    <item
+        android:icon="@drawable/pen_tool"
+        android:title="Tro thanh tac gia" />
+    <item android:title="Cai dat he thong"
+        android:icon="@drawable/settings"/>
+
+    <item android:title="Tro giup va phan hoi"
+        android:icon="@drawable/notebook"/>
+
+
+</menu>

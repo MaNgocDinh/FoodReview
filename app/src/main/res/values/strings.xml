@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">baithi</string>
+    <string name="item_2">item 2</string>
+    <string name="item_1">item 1</string>
+    <string name="item_3">item 3</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+</resources>

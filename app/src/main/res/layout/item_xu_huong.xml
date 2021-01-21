@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="150dp"
+    android:layout_height="150dp"
+    android:background="@drawable/framexhuonglon"
+    android:clipToPadding="false"
+    android:elevation="6dp"
+    android:layout_marginLeft="10dp"
+    android:orientation="vertical">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imgFood"
+        android:layout_width="110dp"
+        android:layout_height="85dp"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CustomShape"
+        app:srcCompat="@drawable/itemhamburger1" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ga ran-Quan 1"
+        android:textColor="#4CAF50"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginTop="3dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginTop="10dp">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/carvAvtShop"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:clipToPadding="true"
+            app:cardCornerRadius="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_alignParentLeft="true"
+            >
+            <ImageView
+                android:id="@+id/imgAvt"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/itemhamburger1"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"
+                />
+        </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/tvNameShop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="KFC"
+            android:textSize="8sp"
+            android:textStyle="bold"
+            android:textColor="#040404"
+            android:paddingTop="3dp"
+            android:layout_marginLeft="10dp"
+            android:paddingLeft="40dp"/>
+
+        <TextView
+            android:id="@+id/tvFollow"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="1M"
+            android:textSize="8sp"
+            android:textColor="#040404"
+            android:textStyle="italic"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="3dp"/>
+        <ImageView
+            android:id="@+id/imgIconLike"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/iconlike"
+            android:layout_toLeftOf="@id/tvFollow"
+            android:layout_marginRight="5dp"
+            android:paddingLeft="5dp"
+            />
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+</LinearLayout>
