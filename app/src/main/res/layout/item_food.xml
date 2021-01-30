@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="6dp"
+    android:layout_margin="10dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/img_food"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:src="@drawable/store"
+            android:scaleType="centerCrop"/>
+        <TextView
+            android:id="@+id/tv_name_food"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Am long quan com chay 2k dong"
+            android:gravity="center_horizontal"
+            android:textSize="15sp"
+            android:textColor="#040404"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:layout_below="@id/img_food"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_avt"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/store"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/tv_name_food"/>
+        <TextView
+            android:id="@+id/tv_name_user"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Co Long"
+            android:textColor="#F3841E"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_below="@id/tv_name_food"
+            android:layout_toRightOf="@+id/img_avt"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"/>
+        <TextView
+            android:id="@+id/tv_follow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2T"
+            android:textSize="10sp"
+            android:textColor="#040404"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/tv_name_food"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"/>
+        <ImageView
+            android:id="@+id/img_ic_heart"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/delete"
+            android:layout_toLeftOf="@id/tv_follow"
+            android:layout_below="@id/tv_name_food"
+            android:layout_marginRight="10dp"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

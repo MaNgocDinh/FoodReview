@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ChiTiet">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img_item"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/pho_store"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CustomShape1"/>
+
+        <RatingBar
+            android:id="@+id/ratingbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/img_item"
+            android:layout_marginLeft="15dp"
+            android:stepSize="0.5"
+            android:progressTint="#FFE500"/>
+
+        <ImageView
+            android:id="@+id/img_ic_eye"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/img_item"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="-30dp"
+            android:layout_toRightOf="@id/ratingbar"
+            android:src="@drawable/eyeicon" />
+
+        <TextView
+            android:id="@+id/tv_follow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/img_item"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="-30dp"
+            android:layout_toRightOf="@+id/img_ic_eye"
+            android:text="512"
+            android:textSize="12sp" />
+
+
+        <TextView
+            android:id="@+id/tv_ten_item"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@id/ratingbar"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="Ngon phat hon truoc chiec banh Hamburger ngon dinh cao khu Bui Vien quan 1"
+            android:textColor="#040404"
+            android:textSize="23sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_review_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_ten_item"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Tiem nho ne khu vuc hoi lo thien minh co the nhin thay bep lam nhung chiec Burger cho minh luon ne :))Banh luon duoc lam nong va gion deu 360 do, nen khi an nong hoi va vo banh cung gion xop lam i. Cu moi lan lam xong motloai banh la nhan vien lai donbep rat ky luong sach se"
+            android:textColor="#040404"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/img_review_1"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@id/tv_review_1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/pho_store" />
+        <ImageView
+            android:id="@+id/img_ic_door"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/ic_door"
+            android:layout_below="@id/img_review_1"
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="20dp"/>
+        <TextView
+            android:id="@+id/tv_door"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="9:00-21:00"
+            android:layout_below="@id/img_review_1"
+            android:layout_toRightOf="@id/img_ic_door"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="70dp"
+            android:textSize="20sp"
+            android:textColor="#040404"/>
+        <ImageView
+            android:id="@+id/img_ic_phone"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/ic_baseline_local_phone_24"
+            android:layout_below="@id/img_ic_door"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"/>
+        <TextView
+            android:id="@+id/tv_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0866160730"
+            android:layout_below="@id/tv_door"
+            android:layout_toRightOf="@id/img_ic_phone"
+            android:layout_marginLeft="20dp"
+            android:textSize="20sp"
+            android:textColor="#040404"
+            android:layout_marginTop="20dp"/>
+        <ImageView
+            android:id="@+id/img_ic_facebook"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/ic_facebook"
+            android:layout_below="@id/img_ic_phone"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"/>
+        <TextView
+            android:id="@+id/tv_facebook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="https://www.facebook.com/grill.valhalla"
+            android:layout_below="@id/tv_phone"
+            android:layout_toRightOf="@id/img_ic_facebook"
+            android:layout_marginLeft="20dp"
+            android:textSize="20sp"
+            android:textColor="#040404"
+            android:layout_marginTop="20dp"/>
+        <ImageView
+            android:id="@+id/img_ic_local"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/ic_local"
+            android:layout_below="@id/img_ic_facebook"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"/>
+        <TextView
+            android:id="@+id/tv_local"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="182 Nguyen Hong Dao P14 quan Tan Binh TPHCM"
+            android:layout_below="@id/tv_facebook"
+            android:layout_toRightOf="@id/img_ic_local"
+            android:layout_marginLeft="20dp"
+            android:textSize="20sp"
+            android:textColor="#040404"
+            android:layout_marginTop="20dp"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_avt"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/store"
+            android:layout_below="@id/img_ic_local"
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="20dp"/>
+        <EditText
+            android:id="@+id/edt_input"
+            android:layout_width="240dp"
+            android:layout_height="30dp"
+            android:inputType="text"
+            android:layout_toRightOf="@id/img_avt"
+            android:layout_below="@id/img_ic_local"
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/background_edittext"/>
+        <ImageView
+            android:id="@+id/img_ic_camera"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_camera"
+            android:layout_toRightOf="@id/edt_input"
+            android:layout_below="@id/img_ic_local"
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="20dp"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_avt_custom"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/store"
+            android:layout_below="@id/img_avt"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="20dp"/>
+        <TextView
+            android:id="@+id/tv_name_custom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rua Vang"
+            android:textSize="20sp"
+            android:textColor="#040404"
+            android:textStyle="bold"
+            android:layout_toRightOf="@id/img_avt_custom"
+            android:layout_below="@id/img_avt"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="20dp"/>
+        <ImageView
+            android:id="@+id/img_ic_world"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_world"
+            android:layout_below="@id/tv_name_custom"
+            android:layout_toRightOf="@id/img_avt_custom"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"/>
+        <TextView
+            android:id="@+id/tv_dmy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#040404"
+            android:layout_toRightOf="@id/img_ic_world"
+            android:layout_below="@id/tv_name_custom"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:text="10/1/2020"/>
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#040404"
+            android:layout_toRightOf="@id/tv_dmy"
+            android:layout_below="@id/tv_name_custom"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:text="16:01"/>
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rat tuyet"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#040404"
+            android:layout_below="@id/img_avt_custom"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="25dp"/>
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hom nay di lam doi qua dat han 2 cai banh \n 1 hai san bo trung \n 1 bacon bo trung pho mai \n 2 cai chi 58k qua re so voi chat luong \n Thit nhieu, tuoi, ngon, banh mem. \n Noi chung rat ung, se tiep tuc ung ho."
+            android:layout_below="@id/tv_title"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:textColor="#040404"
+            android:textSize="15sp"
+            android:paddingLeft="10dp"/>
+
+
+
+
+    </RelativeLayout>
+</androidx.core.widget.NestedScrollView>
+
+
+

@@ -1,4 +1,5 @@
 package com.example.reviewfood;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -7,38 +8,37 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
+import androidx.cardview.widget.CardView;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.arlib.floatingsearchview.FloatingSearchView;
-import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity  implements View.OnClickListener {
-    //search
-    private List<Suggestion> mSuggestions = new ArrayList<>();
-
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    RatingBar mRatingBar;
+    float myRating=0;
     //navigation bar
     Toolbar mToolbar;
     DrawerLayout mDrawerLayout;
     NavigationView mNavigationView;
+    ListView mListView;
 
     //chuyen slide
     ImageView mimgSlide;
-    int[] ChangeSlide = {
+    private int[] ChangeSlide = {
             R.drawable.slide1,
             R.drawable.slide2,
             R.drawable.slide3,
@@ -46,101 +46,136 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
             R.drawable.slide5,
     };
     int dem = 0;
-
     //recyclerview Xu Huong
     private RecyclerView mRcvXuHuong;
     private ArrayList<JV_ItemXuHuong> mPageItemXuHuong;
     private JV_XuHuongAdapter mRcvMainAdapter;
-
-    //recyclerview Food
-    private RecyclerView mRcvFood;
-    private Button mBtnCafe, mBtnTraSua, mBtnSuaChua;
+    //recyclerview Danh Muc
+    private RecyclerView mRcvTatCa;
+    private Button mBtnTrending, mBtnGanBan, mBtnAnVat, mBtnAnTrua,mBtnGiupDo;
     private GridLayoutManager gridLayoutManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        AnhXa();
+        ChuyenSlide();
 
-        mToolbar = findViewById(R.id.toolbar);
-        mDrawerLayout = findViewById(R.id.drawerLayout);
-        mNavigationView = findViewById(R.id.navigation);
-        mimgSlide = findViewById(R.id.img_slide);
+        gridLayoutManager=new GridLayoutManager(this,2);
+        mRcvTatCa.setLayoutManager(gridLayoutManager);
+        FoodAdapter adapter1=new FoodAdapter(getListFood());
+        mRcvTatCa.setAdapter(adapter1);
+        mBtnTrending.setOnClickListener(this);
+        mBtnGanBan.setOnClickListener(this);
+        mBtnAnVat.setOnClickListener(this);
+        mBtnAnTrua.setOnClickListener(this);
+        mBtnGiupDo.setOnClickListener(this);
 
-        //Them du lieu cho recyclerview Xu Huong
-        mRcvXuHuong = findViewById(R.id.rcv_xu_huong);
-        mPageItemXuHuong = new ArrayList<>();
-        mPageItemXuHuong.add(new JV_ItemXuHuong(R.drawable.pho_store, "Pho 24h", R.drawable.pho_store, "Pho24h", "2M"));
-        mPageItemXuHuong.add(new JV_ItemXuHuong(R.drawable.ice_cream_store, "Kem-Quan 1", R.drawable.ice_cream_store, "Ice Cream", "175"));
-        mPageItemXuHuong.add(new JV_ItemXuHuong(R.drawable.itemhamburger1, "Hamburger-81 Landmark", R.drawable.itemhamburger1, "Hamburger", "121M"));
-        mPageItemXuHuong.add(new JV_ItemXuHuong(R.drawable.logosauque, "Com Sau Que-Quan 3", R.drawable.logosauque, "Sau Que", "57"));
-        mPageItemXuHuong.add(new JV_ItemXuHuong(R.drawable.pizzahut_store, "PizzaHut-Nguyen Trai", R.drawable.pizzahut_store, "PizzaHut", "8000"));
-        //adapter cua recyclerview Xu Huong chua danh sach tat ca du lieu vua them vao
-        mRcvMainAdapter = new JV_XuHuongAdapter(mPageItemXuHuong);
-        //sua adapter cua recyclerview trong xml chua trang adapter
-        mRcvXuHuong.setAdapter(mRcvMainAdapter);
+        //chuyen trang
+        mBtnTrending.setOnClickListener(new View.OnClickListener() {
 
-
-        //Anh xa recyclerview cac nut
-        mBtnCafe = findViewById(R.id.btn_cafe);
-        mBtnSuaChua = findViewById(R.id.btn_sua_chua);
-        mBtnTraSua = findViewById(R.id.btn_tra_sua);
-        mRcvFood = findViewById(R.id.rcv_food);
-
-        //adapter cua recyclerview tim kiem chua danh sach ta ca du lieu vua them vao
-        FoodAdapter adapter = new FoodAdapter(getListFood());
-        //recyclerview tim kiem cai lai adapter chua adapter o tren
-        mRcvFood.setAdapter(adapter);
-
-
-        mBtnCafe.setOnClickListener(this);
-        mBtnTraSua.setOnClickListener(this);
-        mBtnSuaChua.setOnClickListener(this);
-
-
-        initData();
-
-        final FloatingSearchView searchView = (FloatingSearchView) findViewById(R.id.floating_search_view);
-        searchView.bringToFront();
-
-        searchView.setOnQueryChangeListener(new FloatingSearchView.OnQueryChangeListener() {
             @Override
-            public void onSearchTextChanged(String oldQuery, String newQuery) {
-                if (!oldQuery.equals("") && newQuery.equals("")) {
-                    searchView.clearSuggestions();
-                } else {
-                    searchView.showProgress();
-                    searchView.swapSuggestions(getSuggestion(newQuery));
-                    searchView.hideProgress();
-                }
+            public void onClick(View view) {
+                chuyentrang();
             }
         });
-        searchView.setOnFocusChangeListener(new FloatingSearchView.OnFocusChangeListener() {
-            @Override
-            public void onFocus() {
-                searchView.showProgress();
-                searchView.swapSuggestions(getSuggestion(searchView.getQuery()));
-                searchView.hideProgress();
-            }
+        //navigation
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this,
+                mDrawerLayout,//DrawerLayout lien ket den ActionBar
+                mToolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close//tro giup mo ta
+        );
+        //mDrawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
 
-            @Override
-            public void onFocusCleared() {
+        //RatingBar
+//        mRatingBar.setOnRatingBarChangeListener((new RatingBar.OnRatingBarChangeListener() {
+//            @Override
+//            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+//                int rating = (int) v;
+//                String message = null;
+//
+//                myRating=(int)ratingBar.getRating();
+//
+//                switch (rating) {
+//                    case 1:
+//                        message = "Sorry to hear that! :(";
+//                        break;
+//                    case 2:
+//                        message = "you can alway suggestion! ";
+//                        break;
+//                    case 3:
+//                        message = "good enough! ";
+//                        break;
+//                    case 4:
+//                        message = "Great! Thank you! ";
+//                        break;
+//                    case 5:
+//                        message = "Awesome! You are the better! ";
+//                        break;
+//
+//                }
+//            }
+//        }));
+//
+//        mBtnGanBan.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(MainActivity.this,String.valueOf(myRating), Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
-            }
-        });
-        searchView.setOnSearchListener(new FloatingSearchView.OnSearchListener() {
-            @Override
-            public void onSuggestionClicked(SearchSuggestion searchSuggestion) {
-                Suggestion suggestion = (Suggestion) searchSuggestion;
-                Toast.makeText(getApplicationContext(), "Ban vua chon " + suggestion.getName(), Toast.LENGTH_SHORT).show();
-            }
+    }
 
-            @Override
-            public void onSearchAction(String currentQuery) {
+    private List<food> getListFood() {
+        List<food> list=new ArrayList<>();
+        list.add(new food(R.drawable.pho_store,"Am long quan com chay 2k dong",R.drawable.logosauque,"Co Long","2T",food.TYPE_TRENDING));
+        list.add(new food(R.drawable.pho_store,"Am long quan com chay 2k dong",R.drawable.logosauque,"Co Long","2T",food.TYPE_TRENDING));
+        list.add(new food(R.drawable.pho_store,"Am long quan com chay 2k dong",R.drawable.logosauque,"Co Long","2T",food.TYPE_TRENDING));
+        list.add(new food(R.drawable.pho_store,"Am long quan com chay 2k dong",R.drawable.logosauque,"Co Long","2T",food.TYPE_TRENDING));
+        list.add(new food(R.drawable.pho_store,"Am long quan com chay 2k dong",R.drawable.logosauque,"Co Long","2T",food.TYPE_TRENDING));
+        list.add(new food(R.drawable.pho_store,"Am long quan com chay 2k dong",R.drawable.logosauque,"Co Long","2T",food.TYPE_TRENDING));
 
-            }
-        });
+        list.add(new food(R.drawable.pizzahut_store,"Am long quan com chay 2k dong",R.drawable.logosauque,"Co Long","2T",food.TYPE_GAN_BAN));
+        list.add(new food(R.drawable.pizzahut_store,"Am long quan com chay 2k dong",R.drawable.logosauque,"Co Long","2T",food.TYPE_GAN_BAN));
+        list.add(new food(R.drawable.pizzahut_store,"Am long quan com chay 2k dong",R.drawable.logosauque,"Co Long","2T",food.TYPE_GAN_BAN));
 
+        list.add(new food(R.drawable.pizzahut_store,"Am long quan com chay 2k dong",R.drawable.logosauque,"Co Long","2T",food.TYPE_AN_VAT));
+        list.add(new food(R.drawable.pizzahut_store,"Am long quan com chay 2k dong",R.drawable.logosauque,"Co Long","2T",food.TYPE_AN_VAT));
+        list.add(new food(R.drawable.pizzahut_store,"Am long quan com chay 2k dong",R.drawable.logosauque,"Co Long","2T",food.TYPE_AN_VAT));
+        list.add(new food(R.drawable.pizzahut_store,"Am long quan com chay 2k dong",R.drawable.logosauque,"Co Long","2T",food.TYPE_AN_VAT));
+
+        list.add(new food(R.drawable.store,"Am long quan com chay 2k dong",R.drawable.logosauque,"Co Long","2T",food.TYPE_AN_TRUA));
+        list.add(new food(R.drawable.store,"Am long quan com chay 2k dong",R.drawable.logosauque,"Co Long","2T",food.TYPE_AN_TRUA));
+        list.add(new food(R.drawable.store,"Am long quan com chay 2k dong",R.drawable.logosauque,"Co Long","2T",food.TYPE_AN_TRUA));
+        list.add(new food(R.drawable.store,"Am long quan com chay 2k dong",R.drawable.logosauque,"Co Long","2T",food.TYPE_AN_TRUA));
+        list.add(new food(R.drawable.store,"Am long quan com chay 2k dong",R.drawable.logosauque,"Co Long","2T",food.TYPE_AN_TRUA));
+        list.add(new food(R.drawable.store,"Am long quan com chay 2k dong",R.drawable.logosauque,"Co Long","2T",food.TYPE_AN_TRUA));
+
+        list.add(new food(R.drawable.picstore2,"Am long quan com chay 2k dong",R.drawable.logosauque,"Co Long","2T",food.TYPE_GIUP_DO));
+        list.add(new food(R.drawable.picstore2,"Am long quan com chay 2k dong",R.drawable.logosauque,"Co Long","2T",food.TYPE_GIUP_DO));
+        list.add(new food(R.drawable.picstore2,"Am long quan com chay 2k dong",R.drawable.logosauque,"Co Long","2T",food.TYPE_GIUP_DO));
+        list.add(new food(R.drawable.picstore2,"Am long quan com chay 2k dong",R.drawable.logosauque,"Co Long","2T",food.TYPE_GIUP_DO));
+        list.add(new food(R.drawable.picstore2,"Am long quan com chay 2k dong",R.drawable.logosauque,"Co Long","2T",food.TYPE_GIUP_DO));
+        list.add(new food(R.drawable.picstore2,"Am long quan com chay 2k dong",R.drawable.logosauque,"Co Long","2T",food.TYPE_GIUP_DO));
+
+
+        return list;
+    }
+
+    //thanh menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.navigation_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    private void ChuyenSlide() {
         //chuyen slide
         final CountDownTimer countDownTimer = new CountDownTimer(13000, 2000) {
             @Override
@@ -156,25 +191,38 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
             }
         };
         countDownTimer.start();
-
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this,
-                mDrawerLayout,//DrawerLayout lien ket den ActionBar
-                mToolbar,
-                R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close//tro giup mo ta
-        );
-//        mDrawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
+    }
+    private void AnhXa() {
+        mToolbar = findViewById(R.id.toolbar);
+        mDrawerLayout = findViewById(R.id.drawerLayout);
+        mNavigationView = findViewById(R.id.navigation);
+        mimgSlide = findViewById(R.id.img_slide);
+        //Them du lieu cho recyclerview Xu Huong
+        mRcvXuHuong = findViewById(R.id.rcv_xu_huong);
+        mPageItemXuHuong = new ArrayList<>();
+        mPageItemXuHuong.add(new JV_ItemXuHuong(R.drawable.pho_store, "Pho 24h", R.drawable.pho_store, "Pho24h", "2M"));
+        mPageItemXuHuong.add(new JV_ItemXuHuong(R.drawable.ice_cream_store, "Kem-Quan 1", R.drawable.ice_cream_store, "Ice Cream", "175"));
+        mPageItemXuHuong.add(new JV_ItemXuHuong(R.drawable.itemhamburger1, "Hamburger-81 Landmark", R.drawable.itemhamburger1, "Hamburger", "121M"));
+        mPageItemXuHuong.add(new JV_ItemXuHuong(R.drawable.logosauque, "Com Sau Que-Quan 3", R.drawable.logosauque, "Sau Que", "57"));
+        mPageItemXuHuong.add(new JV_ItemXuHuong(R.drawable.pizzahut_store, "PizzaHut-Nguyen Trai", R.drawable.pizzahut_store, "PizzaHut", "8000"));
+        //adapter cua recyclerview Xu Huong chua danh sach tat ca du lieu vua them vao
+        mRcvMainAdapter = new JV_XuHuongAdapter(mPageItemXuHuong);
+        //sua adapter cua recyclerview trong xml chua trang adapter
+        mRcvXuHuong.setAdapter(mRcvMainAdapter);
+        //Anh xa cho cac nut
+        mBtnTrending = findViewById(R.id.btn_trending);
+        mBtnGanBan = findViewById(R.id.btn_gan_ban);
+        mBtnAnVat = findViewById(R.id.btn_an_vat);
+        mBtnAnTrua = findViewById(R.id.btn_an_trua);
+        mBtnGiupDo = findViewById(R.id.btn_giup_do);
+        mRcvTatCa = findViewById(R.id.rcv_tat_ca);
+        mRatingBar = findViewById(R.id.ratingbar);
 
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.navigation_menu,menu);
-        return super.onCreateOptionsMenu(menu);
+    public void chuyentrang() {
+        Intent intent = new Intent(this, ChiTiet.class);
+        startActivity(intent);
     }
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
@@ -182,90 +230,42 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         switch (id)
         {
             case R.id.mnuInfo:
-                Intent intent=new Intent(MainActivity.this,infor.class);
+                Intent intent=new Intent(MainActivity.this,ChiTiet.class);
                 startActivity(intent);
                 break;
-                // em vua chat gi the? anh ko de y
-            //anh cho em xiu de em mo anh coi cho de hieu y emok
         }
 
         return true;
     }
 
 
-
-
-
-
-
-
-
-
-
-    //ham danh sach them du lieu cho recyclerview tim kiem
-    private List<food> getListFood() {
-        List<food> list = new ArrayList<food>();
-        list.add(new food(R.drawable.delete, "Cafe", food.TYPE_CAFE));
-        list.add(new food(R.drawable.delete, "Cafe", food.TYPE_CAFE));
-        list.add(new food(R.drawable.delete, "Cafe", food.TYPE_CAFE));
-        list.add(new food(R.drawable.delete, "Cafe", food.TYPE_CAFE));
-
-        list.add(new food(R.drawable.delete, "Tra sua", food.TYPE_TRA_SUA));
-        list.add(new food(R.drawable.delete, "Tra sua", food.TYPE_TRA_SUA));
-        list.add(new food(R.drawable.delete, "Tra sua", food.TYPE_TRA_SUA));
-        list.add(new food(R.drawable.delete, "Tra sua", food.TYPE_TRA_SUA));
-
-        list.add(new food(R.drawable.delete, "Sua chua", food.TYPE_SUA_CHUA));
-        list.add(new food(R.drawable.delete, "Sua chua", food.TYPE_SUA_CHUA));
-        list.add(new food(R.drawable.delete, "Sua chua", food.TYPE_SUA_CHUA));
-        list.add(new food(R.drawable.delete, "Sua chua", food.TYPE_SUA_CHUA));
-
-        return list;
-    }
-
     @Override
-    public void onClick(View v) {
-        switch(v.getId()){
-            case R.id.btn_cafe:
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_trending:
                 scrollToItem(0);
                 break;
-            case R.id.btn_tra_sua:
-                scrollToItem(4);
+            case R.id.btn_gan_ban:
+                scrollToItem(6);
                 break;
-            case R.id.btn_sua_chua:
-                scrollToItem(8);
+            case R.id.btn_an_vat:
+                scrollToItem(9);
+                break;
+            case R.id.btn_an_trua:
+                scrollToItem(13);
+                break;
+            case R.id.btn_giup_do:
+                scrollToItem(19);
                 break;
         }
+
     }
 
-    private void scrollToItem(int index) {
-        if(gridLayoutManager==null){
+    private void scrollToItem(int i) {
+        if(gridLayoutManager ==null){
             return;
         }
-        gridLayoutManager.scrollToPositionWithOffset(index,0);
-    }
-
-
-
-    private void initData(){
-        mSuggestions.add(new Suggestion("Ha Noi"));
-        mSuggestions.add(new Suggestion("Ha nam"));
-        mSuggestions.add(new Suggestion("Da nang"));
-        mSuggestions.add(new Suggestion("Dong nai"));
-        mSuggestions.add(new Suggestion("Phú Tho"));
-        mSuggestions.add(new Suggestion("Quang ngai"));
-        mSuggestions.add(new Suggestion("Thanh hoa"));
-        mSuggestions.add(new Suggestion("Hue"));
-    }
-
-    private List<Suggestion> getSuggestion(String query){
-        List<Suggestion> suggestions=new ArrayList<>();
-        for(Suggestion suggestion:mSuggestions){
-            if(suggestion.getName().toLowerCase().contains(query.toLowerCase())){
-                suggestions.add(suggestion);
-            }
-        }
-        return suggestions;
+        gridLayoutManager.scrollToPositionWithOffset(i,0);
     }
 }
 

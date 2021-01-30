@@ -20,10 +20,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="#F3841E"
-                app:menu="@menu/toolbar"
-                app:navigationIcon="@drawable/list1_navi"
                 app:title="Food Review"
-                app:titleTextColor="#ffff" />
+                app:titleTextColor="#ffff"
+                app:menu="@menu/toolbar"/>
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
@@ -34,84 +33,103 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                    <LinearLayout
-                        xmlns:android="http://schemas.android.com/apk/res/android"
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
-                        xmlns:tools="http://schemas.android.com/tools"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/cv_search"
-                        >
-
-                        <com.arlib.floatingsearchview.FloatingSearchView
-                            android:id="@+id/floating_search_view"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:elevation="10dp"
-                            app:floatingSearch_searchBarMarginLeft="5dp"
-                            app:floatingSearch_searchBarMarginRight="5dp"
-                            app:floatingSearch_searchHint="Nhập nội dung cần t..."
-                            app:floatingSearch_leftActionMode="showSearch" />
-                    </LinearLayout>
-// no bi sao em
-                //noi chung la dang ly ra minh bam vo cai thanh search la no phai so ra may cai thong tin giong vs minh tim kiem ak appbar_scrolling_view_behavior
-                //ma em ko bk sao vo day em code lai ma no ko so ra bi cai rcv no che mat roi anh
-
-
                 <ImageView
                     android:id="@+id/img_slide"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:layout_below="@id/cv_search"
+                    android:layout_marginTop="0dp"
                     android:adjustViewBounds="true"
                     android:scaleType="fitXY"
                     android:src="@drawable/backgroundgrab1" />
 
-                <LinearLayout
-                    android:id="@+id/linearlayout_danh_muc"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/img_slide"
-                    android:orientation="vertical">
+                <HorizontalScrollView
+                    android:id="@+id/horizontalScrollView_food"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:scrollbars="horizontal"
+                    android:layout_below="@+id/img_slide"
+                    android:layout_marginTop="10dp">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="10dp">
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:orientation="horizontal">
 
                         <Button
-                            android:id="@+id/btn_cafe"
-                            android:layout_width="0dp"
+                            android:id="@+id/btn_trending"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="cafe" />
+                            android:layout_gravity="center"
+                            android:layout_marginRight="10dp"
+                            android:background="#F3841E"
+                            android:padding="5dp"
+                            android:text="Trending"
+                            android:textColor="#000000"
+                            android:textSize="13sp" />
 
                         <Button
-                            android:id="@+id/btn_tra_sua"
-                            android:layout_width="0dp"
+                            android:id="@+id/btn_gan_ban"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="tra sua" />
+                            android:layout_gravity="center"
+                            android:layout_marginRight="10dp"
+                            android:background="#F3841E"
+                            android:text="Gần bạn"
+                            android:textColor="#000000"
+                            android:padding="5dp"
+                            android:textSize="13sp"/>
 
                         <Button
-                            android:id="@+id/btn_sua_chua"
-                            android:layout_width="0dp"
+                            android:id="@+id/btn_an_vat"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="sua chua" />
+                            android:layout_gravity="center"
+                            android:layout_marginRight="10dp"
+                            android:background="#F3841E"
+                            android:text="Ăn vặt"
+                            android:textColor="#000000"
+                            android:padding="5dp"
+                            android:textSize="13sp"  />
+
+                        <Button
+                            android:id="@+id/btn_an_trua"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="10dp"
+                            android:background="#F3841E"
+                            android:text="Ăn trưa"
+                            android:textColor="#000000"
+                            android:padding="5dp"
+                            android:textSize="13sp"  />
+
+                        <Button
+                            android:id="@+id/btn_giup_do"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="10dp"
+                            android:background="#F3841E"
+                            android:text="Giúp đỡ"
+                            android:textColor="#000000"
+                            android:padding="5dp"
+                            android:textSize="13sp"  />
+
+
+
                     </LinearLayout>
-                </LinearLayout>
+
+                </HorizontalScrollView>
+
 
 
                 <TextView
                     android:id="@+id/tv_xu_huong"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/linearlayout_danh_muc"
+                    android:layout_below="@id/horizontalScrollView_food"
+                    android:layout_marginLeft="30dp"
                     android:layout_marginTop="10dp"
-                    android:paddingStart="50dp"
-                    android:paddingBottom="10dp"
                     android:text="Xu huong"
                     android:textColor="#040404"
                     android:textSize="15sp"
@@ -122,36 +140,35 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_xu_huong"
-                    android:layout_marginTop="3dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/item_xu_huong" />
 
                 <TextView
-                    android:id="@+id/tv_danh_muc"
+                    android:id="@+id/tv_trending"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/rcv_xu_huong"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
-                    android:text="Tat ca"
-                    android:textColor="#CC0000"
+                    android:text="Trending"
+                    android:textColor="#000000"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rcv_food"
+                    android:id="@+id/rcv_tat_ca"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/tv_danh_muc"
-                    android:layout_marginStart="10dp"
+                    android:layout_below="@id/tv_trending"
+                    android:layout_marginTop="10dp"
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     app:spanCount="2"
-                    tools:listitem="@layout/item_an_trua" />
-            </RelativeLayout>// duoc chua em
-            //con cai search anh no ko so ra
+                    tools:listitem="@layout/item_food" />
+            </RelativeLayout>
 
         </androidx.core.widget.NestedScrollView>
 
@@ -166,7 +183,9 @@
             app:menu="@menu/navigation_menu"
             android:background="#F3841E"
             android:fitsSystemWindows="true"
-            />
+            app:itemTextColor="#FFFFFF"
+            app:itemIconTint="@color/colorPrimary"
+            app:headerLayout="@layout/header_navigation"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
 

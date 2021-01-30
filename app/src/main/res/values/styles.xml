@@ -11,5 +11,10 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeBottomRight">60%</item>
     </style>
+    <style name="ShapeAppearanceOverlay.App.CustomShape1" parent="">
+
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeBottomRight">75%</item>
+    </style>
 
 </resources>

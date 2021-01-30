@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-<item android:title="Nam Nguyen"
-    android:icon="@drawable/ic_useradd"/>
+<group>
     <item
         android:icon="@drawable/ic_useradd"
         android:title="Theo doi"
@@ -17,11 +16,13 @@
     <item
         android:icon="@drawable/pen_tool"
         android:title="Tro thanh tac gia" />
+</group>
+    <group >
     <item android:title="Cai dat he thong"
         android:icon="@drawable/settings"/>
 
     <item android:title="Tro giup va phan hoi"
         android:icon="@drawable/notebook"/>
-
+    </group>
 
 </menu>
